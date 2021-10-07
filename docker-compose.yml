@@ -4,3 +4,5 @@ services:
     image: ruimarinho/bitcoin-core:0.21.1
     ports:
       - "8333:8333"
+    volumes:
+      - /srv/docker/bitcoin:/home/bitcoin/.bitcoin
