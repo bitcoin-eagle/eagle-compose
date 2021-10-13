@@ -1,8 +1,22 @@
 version: "3.9"
 services:
   bitcoin-core:
-    image: ruimarinho/bitcoin-core:0.21.1
+    image: ruimarinho/bitcoin-core:0.21
     ports:
       - "8333:8333"
+    expose:
+      - "8332"
     volumes:
       - /srv/docker/bitcoin:/home/bitcoin/.bitcoin
+  electrs:
+    image: iangregsondev/electrs:0.9
+    ports:
+      - "50001:50001"
+    expose:
+      - "4224"
+    environment:
+      - ELECTRS_DB_DIR=/home/user/db
+      - ELECTRS_ELECTRUM_RPC_ADDR=0.0.0.0:50001
+      - ELECTRS_MONITORING_ADDR=0.0.0.0:4224
+    volumes:
+      - /srv/docker/electrs:/home/user/db
